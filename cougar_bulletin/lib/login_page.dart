@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'auth.dart';
 
 class LoginPage extends StatefulWidget{
+ LoginPage({this.auth, this.onSignedIn});
+ final BaseAuth auth;
+ final VoidCallback onSignedIn;
 
   @override 
   State<StatefulWidget> createState() => new _LoginPageState();
@@ -20,6 +24,24 @@ class _LoginPageState extends State<LoginPage>{
     String _password;
     FormType _formType = FormType.login;
 
+
+/// This function will be used later. It adds "@csusm.edu" to the login
+/// So users just need to type the first part of their school email
+/*
+    String validateEmail(String value) {
+      if (value.isEmpty) {
+        return 'Username cannot be empty';
+        }
+
+      RegExp exp = new RegExp(r"[a-z]{5}[0-9]{3}");
+
+      if (!exp.hasMatch(value)) {
+        return 'Enter a valid username';
+      }
+              
+      return null;
+    }
+*/
     bool validateAndSave(){
       final form = formKey.currentState;
       if (form.validate()){
@@ -34,14 +56,16 @@ class _LoginPageState extends State<LoginPage>{
 
     void validateAndSubmit() async {
       if (validateAndSave()){
+        //_email = _email + "@cougars.csusm.edu";
         try {
           if (_formType == FormType.login) {
-            AuthResult user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
-            print('Signed in: ${user.user.uid}');
+            String userId = await widget.auth.signInWithEmailAndPassword( _email, _password);
+            print('Signed in: $userId');
           } else {
-            AuthResult user = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password);
-            print('Registered user: ${user.user.uid}');
+            String userId = await widget.auth.createUserWithEmailAndPassword(_email, _password);
+            print('Registered user: $userId');
           }
+          widget.onSignedIn();
         }
         catch (e) {
           print('Error: $e');
@@ -85,7 +109,8 @@ class _LoginPageState extends State<LoginPage>{
       return [
         new TextFormField(
           decoration: new InputDecoration(labelText: 'Email'),
-          validator: (value) => value.isEmpty ? 'Email cannot be empty' : null,
+          //maxLength: 8,
+          validator:  (value) => value.isEmpty ? 'Email cannot be empty' : null,
           onSaved: (value) => _email = value,
         ),
         new TextFormField(
