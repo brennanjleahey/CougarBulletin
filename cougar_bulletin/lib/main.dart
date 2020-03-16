@@ -2,27 +2,44 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:cougar_bulletin/notifier/post_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'feed_page.dart';
 import 'login_page.dart';
-import 'auth.dart';
-import 'root_page.dart';
-import 'root_page.dart';
+import 'notifier/auth_notifier.dart';
 
-void main() {
+void main() => runApp(MultiProvider(
+  providers: [
+    ChangeNotifierProvider(
+      create: (context) => AuthNotifier(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => PostNotifier(),
+    ),
+  ],
+  child: MyApp(),
+));
+
+
+/*void main() {
   runApp(new MyApp());
 }
- 
+*/ 
 class MyApp extends StatelessWidget {
 
   @override
     Widget build(BuildContext context){
-
-        return new MaterialApp(
+        return MaterialApp(
           title: 'Cougar Bulletin Login',
-          theme: new ThemeData(
+          theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: new RootPage(auth: new Auth())
+          home: Consumer<AuthNotifier>(
+            builder: (context, notifier, child){
+              return notifier.user != null ? FeedPage() : Login();
+            },
+          )
         );
   }
 }
