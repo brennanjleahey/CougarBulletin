@@ -5,8 +5,10 @@
 import 'package:cougar_bulletin/notifier/post_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'feed_page.dart';
-import 'login_page.dart';
+import 'screens/welcome_screen.dart';
+import 'screens/login_screen.dart';
+// import 'feed_page.dart';
+// import 'login_page.dart';
 import 'notifier/auth_notifier.dart';
 
 void main() => runApp(MultiProvider(
@@ -32,14 +34,21 @@ class MyApp extends StatelessWidget {
     Widget build(BuildContext context){
         return MaterialApp(
           title: 'Cougar Bulletin Login',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
+          theme: ThemeData.dark().copyWith(
+            textTheme: TextTheme(
+              bodyText1: TextStyle(color:Colors.black38),
+            ),
           ),
-          home: Consumer<AuthNotifier>(
-            builder: (context, notifier, child){
-              return notifier.user != null ? FeedPage() : Login();
-            },
-          )
+          initialRoute: WelcomeScreen.id,
+          routes: {
+            WelcomeScreen.id:(context) => WelcomeScreen(),
+            // 'login_screen': (context) => LoginScreen(),
+          },
+          // home: Consumer<AuthNotifier>(
+          //   builder: (context, notifier, child){
+          //     return notifier.user != null ? FeedPage() : Login();
+          //   },
+          // )
         );
   }
 }
