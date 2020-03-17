@@ -212,7 +212,7 @@ class _LoginState extends State<Login> {
     );
   }
 }
-/// This function will be used later. It adds "@csusm.edu" to the login
+/// This function may be used later. It adds "@csusm.edu" to the login
 /// So users just need to type the first part of their school email
 /*
     String validateEmail(String value) {
