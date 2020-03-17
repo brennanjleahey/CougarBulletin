@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:cougar_bulletin/notifier/post_notifier.dart';
+import 'package:cougar_bulletin/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/welcome_screen.dart';
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
           initialRoute: WelcomeScreen.id,
           routes: {
             WelcomeScreen.id:(context) => WelcomeScreen(),
-            // 'login_screen': (context) => LoginScreen(),
+            LoginScreen.id: (context) => LoginScreen(),
+            RegistrationScreen.id:(context)=>RegistrationScreen(),
           },
           // home: Consumer<AuthNotifier>(
           //   builder: (context, notifier, child){
