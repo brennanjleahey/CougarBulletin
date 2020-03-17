@@ -40,15 +40,15 @@ class MyApp extends StatelessWidget {
           title: 'Cougar Bulletin Login',
           theme: ThemeData.dark().copyWith(
             textTheme: TextTheme(
-              body1: TextStyle(color:Colors.black38),
+              bodyText1: TextStyle(color:Colors.black38),
             ),
           ),
-          /*initialRoute: WelcomeScreen.id,
+          initialRoute: WelcomeScreen.id,
           routes: {
             WelcomeScreen.id:(context) => WelcomeScreen(),
             LoginScreen.id: (context) => LoginScreen(),
             RegistrationScreen.id:(context)=>RegistrationScreen(),
-          },*/
+          },
            home: Consumer<AuthNotifier>(
              builder: (context, notifier, child){
                return notifier.user != null ? FeedPage() : Login();
