@@ -8,9 +8,30 @@ class WelcomeScreen extends StatefulWidget{
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen>{
+class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderStateMixin{
+
+  AnimationController controller;
 
    @override
+   void initState(){
+     super.initState();
+
+     controller = AnimationController(
+       duration: Duration(seconds:1),
+       vsync: this,
+       upperBound: 60.0
+     );
+
+     controller.forward();
+     controller.addListener(() {
+       setState(() {
+         
+       });
+       print(controller.value);
+     });
+
+   }
+   
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -22,9 +43,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>{
           children:<Widget>[
             Row(
               children:<Widget>[
-                Container(
-                  child:Image.asset('images/logo.jpg'),
-                  height:60.0,
+                Hero(
+                  tag: 'logo',
+                    child: Container(
+                    child:Image.asset('images/logo.jpg'),
+                    height:controller.value,
+                  ),
                 ),
                 Text('Cougar Bulletin',
                   style: TextStyle(
