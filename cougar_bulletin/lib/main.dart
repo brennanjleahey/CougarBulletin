@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/login_screen.dart';
+import 'feed_page.dart';
+import 'login_page.dart';
+
 // import 'feed_page.dart';
 // import 'login_page.dart';
 import 'notifier/auth_notifier.dart';
@@ -37,20 +40,20 @@ class MyApp extends StatelessWidget {
           title: 'Cougar Bulletin Login',
           theme: ThemeData.dark().copyWith(
             textTheme: TextTheme(
-              bodyText1: TextStyle(color:Colors.black38),
+              body1: TextStyle(color:Colors.black38),
             ),
           ),
-          initialRoute: WelcomeScreen.id,
+          /*initialRoute: WelcomeScreen.id,
           routes: {
             WelcomeScreen.id:(context) => WelcomeScreen(),
             LoginScreen.id: (context) => LoginScreen(),
             RegistrationScreen.id:(context)=>RegistrationScreen(),
-          },
-          // home: Consumer<AuthNotifier>(
-          //   builder: (context, notifier, child){
-          //     return notifier.user != null ? FeedPage() : Login();
-          //   },
-          // )
+          },*/
+           home: Consumer<AuthNotifier>(
+             builder: (context, notifier, child){
+               return notifier.user != null ? FeedPage() : Login();
+             },
+           )
         );
   }
 }
