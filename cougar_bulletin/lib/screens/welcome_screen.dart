@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cougar_bulletin/screens/login_screen.dart';
 import 'package:cougar_bulletin/screens/registration_screen.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget{
   static String id = 'welcome screen';
@@ -50,8 +51,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                     height:controller.value,
                   ),
                 ),
-                Text('Cougar Bulletin',
-                  style: TextStyle(
+                ColorizeAnimatedTextKit(
+                  onTap: (){
+                    print('Tap event');
+                  },
+                  text:['Cougar Bulletin'],
+                  colors: [
+                  Colors.redAccent,
+                  Colors.blue,
+                  Colors.yellow,
+                  Colors.purple,
+                  ],
+                  textStyle: TextStyle(
                     fontSize:30.0,
                     fontWeight:FontWeight.bold,
                     color: Colors.black54
