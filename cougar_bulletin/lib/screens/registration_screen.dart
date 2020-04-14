@@ -37,6 +37,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 48.0,
               ),
               TextField(
+              
                  keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -46,7 +47,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   hintText: 'Enter your email',
                   hintStyle: TextStyle(fontSize: 20.0,color: Colors.black.withOpacity(0.2)),
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(32.0)),
                   ),
