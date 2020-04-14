@@ -1,3 +1,5 @@
+import 'package:cougar_bulletin/feed_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cougar_bulletin/components/RoundedButton.dart';
 
@@ -8,7 +10,10 @@ class LoginScreen extends StatefulWidget{
 }
 
 class _LoginScreenState extends State<LoginScreen>{
-  
+  final _auth = FirebaseAuth.instance;
+  String email;
+  String password;
+
   Widget build(BuildContext context){
     return Scaffold(
       
@@ -31,7 +36,10 @@ class _LoginScreenState extends State<LoginScreen>{
                 height: 28.0,
               ),
               TextField(
+                 keyboardType: TextInputType.emailAddress,
+                textAlign: TextAlign.center,
                 onChanged: (value) {
+                  email = value;
                   //Do something with the user input.
                 },
               decoration: InputDecoration(
@@ -57,7 +65,10 @@ class _LoginScreenState extends State<LoginScreen>{
                 height: 8.0,
               ),
               TextField(
+                 obscureText: true,
+                textAlign: TextAlign.center,
                 onChanged: (value) {
+                  password = value;
                   //Do something with the user input.
                 },
                  decoration: InputDecoration(
@@ -82,7 +93,16 @@ class _LoginScreenState extends State<LoginScreen>{
               SizedBox(
                 height: 20.0,
               ),
-               RoundedButton(title: 'Log In',colour: Colors.blueAccent,onPressed:(){})
+               RoundedButton(title: 'Log In',colour: Colors.blueAccent,onPressed:()async{
+                 try{final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
+                  if(user != null){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()),);
+                  }
+               }catch(e){
+                 print(e);
+                }
+               },
+              ),
             ],
           ),
         )

@@ -1,23 +1,41 @@
 import 'package:cougar_bulletin/notifier/post_notifier.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'api/post_api.dart';
 import 'notifier/auth_notifier.dart';
 
 class FeedPage extends StatefulWidget {
+  
   @override
   _FeedPageState createState() => _FeedPageState();
 }
 
 class _FeedPageState extends State<FeedPage> {
+  final _auth = FirebaseAuth.instance;
+  FirebaseUser loggedInUser;
   @override
   void initState() {
+    // getCurrentUser();
     PostNotifier postNotifier =
         Provider.of<PostNotifier>(context, listen: false);
     getPosts(postNotifier);
     super.initState();
+    
   }
 
+  void getCurrentUser() async {
+    try{
+      final user = await _auth.currentUser();
+      if (user != null){
+        loggedInUser = user;
+        print(loggedInUser.email);
+      }
+    }
+    catch(e){
+      print(e);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     AuthNotifier authNotifier =
