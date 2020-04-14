@@ -36,6 +36,7 @@ class _LoginScreenState extends State<LoginScreen>{
                 height: 28.0,
               ),
               TextField(
+                
                  keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -43,7 +44,8 @@ class _LoginScreenState extends State<LoginScreen>{
                   //Do something with the user input.
                 },
               decoration: InputDecoration(
-                hintText: 'Enter your email',
+               hintText: 'Enter your email',
+              hintStyle: TextStyle(fontSize: 20.0,color: Colors.black.withOpacity(0.2)),
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   border:OutlineInputBorder(
@@ -73,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen>{
                 },
                  decoration: InputDecoration(
                     hintText: 'Enter your password.',
+                    hintStyle: TextStyle(fontSize: 20.0,color: Colors.black.withOpacity(0.2)),
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   border: OutlineInputBorder(
