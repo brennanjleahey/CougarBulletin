@@ -15,6 +15,7 @@ import 'login_page.dart';
 // import 'login_page.dart';
 import 'notifier/auth_notifier.dart';
 
+
 // void main() => runApp(MultiProvider(
 //   providers: [
 //     ChangeNotifierProvider(
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
           title: 'Cougar Bulletin Login',
           theme: ThemeData.dark().copyWith(
             textTheme: TextTheme(
-              bodyText1: TextStyle(color:Colors.black38),
+              body1: TextStyle(color:Colors.black38),
             ),
           ),
           initialRoute: WelcomeScreen.id,
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
                return notifier.user != null ? FeedPage() : Login();
              },
            )
+           
         );
   }
 }
