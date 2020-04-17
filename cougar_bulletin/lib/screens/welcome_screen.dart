@@ -4,6 +4,9 @@ import 'package:cougar_bulletin/screens/registration_screen.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cougar_bulletin/components/RoundedButton.dart';
 
+import '../login_page.dart';
+
+
 class WelcomeScreen extends StatefulWidget{
   static String id = 'welcome screen';
   
@@ -74,7 +77,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
               height:48.0
             ),
             RoundedButton(title: 'Log in',colour:Colors.deepPurpleAccent,onPressed: (){
-              Navigator.pushNamed(context, LoginScreen.id);
+              Navigator.pushNamed(context, LoginScreen.id); // LoginScreen.id
             },),
             RoundedButton(title: 'Register',colour:Colors.blueAccent,onPressed: (){
               Navigator.pushNamed(context, RegistrationScreen.id);

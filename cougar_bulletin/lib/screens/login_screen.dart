@@ -1,18 +1,40 @@
+import 'package:cougar_bulletin/api/post_api.dart';
 import 'package:cougar_bulletin/feed_page.dart';
+import 'package:cougar_bulletin/model/user.dart';
+import 'package:cougar_bulletin/notifier/auth_notifier.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cougar_bulletin/components/RoundedButton.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget{
   static const String id = 'Login_screen';
-  
-  _LoginScreenState createState() => _LoginScreenState();
+ @override
+  State<StatefulWidget> createState() {
+    return _LoginScreenState();
+  }
 }
 
 class _LoginScreenState extends State<LoginScreen>{
-  final _auth = FirebaseAuth.instance;
-  String email;
-  String password;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _passwordController = new TextEditingController();
+  //AuthMode _authMode = AuthMode.Login;
+
+  User _user = User();
+
+  @override
+  void initState() {
+    AuthNotifier authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+    initializeCurrentUser(authNotifier);
+    super.initState();
+  }
+
+  void _submitForm() {
+    if (!_formKey.currentState.validate()) {return;}
+    _formKey.currentState.save();
+    AuthNotifier authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+  }
+
 
   Widget build(BuildContext context){
     return Scaffold(
@@ -35,14 +57,25 @@ class _LoginScreenState extends State<LoginScreen>{
               SizedBox(
                 height: 28.0,
               ),
-              TextField(
-                
-                 keyboardType: TextInputType.emailAddress,
+              
+              TextFormField( 
+                autovalidate: true,
+                keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
-                onChanged: (value) {
-                  email = value;
-                  //Do something with the user input.
+                validator: (String value) {
+                  if (value.isEmpty) {
+                  return 'Email is required';
+                  }
+
+                  if (!RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?").hasMatch(value)) {
+                  return 'Please enter a valid email address';
+                  }
+                return null;
                 },
+
+              onSaved: (String value) {
+                 _user.email = value;
+              },
               decoration: InputDecoration(
                hintText: 'Enter your email',
               hintStyle: TextStyle(fontSize: 20.0,color: Colors.black.withOpacity(0.2)),
@@ -66,12 +99,22 @@ class _LoginScreenState extends State<LoginScreen>{
                SizedBox(
                 height: 8.0,
               ),
-              TextField(
-                 obscureText: true,
+              TextFormField(
+                autovalidate: true,
+                obscureText: true,
                 textAlign: TextAlign.center,
-                onChanged: (value) {
-                  password = value;
-                  //Do something with the user input.
+                controller: _passwordController,
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return 'Password is required';
+                  }
+                  if (value.length < 5 || value.length > 20) {
+                    return 'Password must be betweem 5 and 20 characters';
+                  }
+                  return null;
+                },
+                onSaved: (String value) {
+                  _user.password = value;
                 },
                  decoration: InputDecoration(
                     hintText: 'Enter your password.',
@@ -96,15 +139,10 @@ class _LoginScreenState extends State<LoginScreen>{
               SizedBox(
                 height: 20.0,
               ),
-               RoundedButton(title: 'Log In',colour: Colors.blueAccent,onPressed:()async{
-                 try{final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
-                  if(user != null){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FeedPage()),);
-                  }
-               }catch(e){
-                 print(e);
-                }
-               },
+               RoundedButton(
+                 title: 'Log In',
+                 colour: Colors.blueAccent,
+                 onPressed: () => _submitForm(),
               ),
             ],
           ),

@@ -75,3 +75,26 @@ getPosts(PostNotifier postNotifier) async {
 
   postNotifier.postList = _postList;
 }
+
+uploadPost(Post post, bool isUpdating) async {
+  CollectionReference postRef = Firestore.instance.collection('post');
+
+  if(isUpdating){
+    await postRef.document(post.id).updateData(post.toMap());
+    print("Updated post: ${post.id}");
+  }
+  else
+  {
+    DocumentReference docRef = await postRef.add(post.toMap());
+
+    post.id = docRef.documentID;
+
+    print("Uploaded post: ${post.toString()}");
+
+    await docRef.setData(post.toMap(), merge: true);
+  }
+
+
+}
+
+//Todo - upload image Coding With Curry Part 3 45:00

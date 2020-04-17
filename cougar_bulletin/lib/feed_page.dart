@@ -1,4 +1,6 @@
 import 'package:cougar_bulletin/notifier/post_notifier.dart';
+import 'package:cougar_bulletin/post_form.dart';
+import 'package:cougar_bulletin/postdetail_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,8 +49,17 @@ class _FeedPageState extends State<FeedPage> {
         child: ListView.separated(
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
+              // Todo: leading image Coding with Curry Part 2 15:18
               title: Text(postNotifier.postList[index].title),
-              subtitle: Text(postNotifier.postList[index].body),
+              subtitle: Text(postNotifier.postList[index].author),
+              onTap: (){
+                postNotifier.currentPost = postNotifier.postList[index];
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context){
+                    return PostDetail();
+                  })
+                );
+              },
             );
           },
           itemCount: postNotifier.postList.length,
@@ -59,6 +70,13 @@ class _FeedPageState extends State<FeedPage> {
           },
         ),
       ),
+      floatingActionButton: FloatingActionButton( 
+        onPressed: () {
+          postNotifier.currentPost = null;
+          Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context){
+                    return PostForm(isUpdating: false);
+        },));})
     );
   }
 }

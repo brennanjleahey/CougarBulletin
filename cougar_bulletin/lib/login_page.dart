@@ -78,7 +78,7 @@ class _LoginState extends State<Login> {
         labelStyle: TextStyle(color: Colors.white54),
       ),
       keyboardType: TextInputType.emailAddress,
-      initialValue: '@csusm.edu',
+      initialValue: '@gmail.com', // CHANGE TO @csusm.edu 
       style: TextStyle(fontSize: 26, color: Colors.white),
       cursorColor: Colors.white,
       validator: (String value) {
@@ -151,6 +151,7 @@ class _LoginState extends State<Login> {
     print("Building login screen");
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         constraints: BoxConstraints.expand(
           height: MediaQuery.of(context).size.height,

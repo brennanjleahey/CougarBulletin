@@ -1,5 +1,5 @@
 class User {
-  String displayName;
+  String displayName = "DefaultName";
   String email;
   String password;
 
