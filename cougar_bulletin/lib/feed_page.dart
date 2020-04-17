@@ -12,45 +12,28 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
-  final _auth = FirebaseAuth.instance;
-  FirebaseUser loggedInUser;
   @override
   void initState() {
     // getCurrentUser();
-    PostNotifier postNotifier =
-        Provider.of<PostNotifier>(context, listen: false);
+    PostNotifier postNotifier = Provider.of<PostNotifier>(context, listen: false);
     getPosts(postNotifier);
     super.initState();
-    
   }
 
-  void getCurrentUser() async {
-    try{
-      final user = await _auth.currentUser();
-      if (user != null){
-        loggedInUser = user;
-        print(loggedInUser.email);
-      }
-    }
-    catch(e){
-      print(e);
-    }
-  }
+  
   @override
   Widget build(BuildContext context) {
-    AuthNotifier authNotifier =
-        Provider.of<AuthNotifier>(context, listen: false);
+    AuthNotifier authNotifier = Provider.of<AuthNotifier>(context);
     PostNotifier postNotifier = Provider.of<PostNotifier>(context);
 
     Future<void> _refreshList() async {
       getPosts(postNotifier);
     }
+    print("building feed");
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          authNotifier.user != null ? authNotifier.user.displayName : "Feed",
-        ),
+        title: Text("Feed"),
         actions: <Widget>[
           FlatButton(
             child: Text('Logout',
