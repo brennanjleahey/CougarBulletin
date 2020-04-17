@@ -16,22 +16,22 @@ import 'login_page.dart';
 import 'notifier/auth_notifier.dart';
 
 
-// void main() => runApp(MultiProvider(
-//   providers: [
-//     ChangeNotifierProvider(
-//       create: (context) => AuthNotifier(),
-//     ),
-//     ChangeNotifierProvider(
-//       create: (context) => PostNotifier(),
-//     ),
-//   ],
-//   child: MyApp(),
-// ));
+ void main() => runApp(MultiProvider(
+   providers: [
+     ChangeNotifierProvider(
+       create: (context) => AuthNotifier(),
+     ),
+     ChangeNotifierProvider(
+       create: (context) => PostNotifier(),
+     ),
+   ],
+   child: MyApp(),
+ ));
 
-
+/*
 void main() {
   runApp(new MyApp());
-}
+}*/
  
 class MyApp extends StatelessWidget {
 
