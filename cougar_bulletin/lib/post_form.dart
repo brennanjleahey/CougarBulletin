@@ -135,7 +135,7 @@ class _PostFormState extends State<PostForm> {
     }
 
     // Todo: set current post's author to current user
-    _currentPost.author = "Fixme";
+    _currentPost.author = "leahe001";
     uploadPost(_currentPost, widget.isUpdating);
 
     print("Title: ${_currentPost.title}");
@@ -170,6 +170,8 @@ class _PostFormState extends State<PostForm> {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => _savePost(context),
+            child: Icon(Icons.navigation),
+            backgroundColor: Colors.blue,
             ),
     );
   }

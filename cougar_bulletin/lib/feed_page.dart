@@ -16,7 +16,6 @@ class FeedPage extends StatefulWidget {
 class _FeedPageState extends State<FeedPage> {
   @override
   void initState() {
-    // getCurrentUser();
     PostNotifier postNotifier = Provider.of<PostNotifier>(context, listen: false);
     getPosts(postNotifier);
     super.initState();
@@ -76,7 +75,10 @@ class _FeedPageState extends State<FeedPage> {
           Navigator.of(context).push(
                   MaterialPageRoute(builder: (BuildContext context){
                     return PostForm(isUpdating: false);
-        },));})
+        },));},
+        child: Icon(Icons.add),
+        backgroundColor: Colors.white,
+        )
     );
   }
 }

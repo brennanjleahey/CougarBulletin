@@ -6,10 +6,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'notifier/auth_notifier.dart';
+
 class PostDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PostNotifier postNotifier = Provider.of<PostNotifier>(context, listen: false);
+    AuthNotifier authNotifier = Provider.of<AuthNotifier>(context);
 
     return Scaffold(
         appBar: AppBar(
@@ -53,12 +56,16 @@ class PostDetail extends StatelessWidget {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton( // Todo: condition - if the user did not make this post, then they cannot edit it
+        // Todo: condition - if the user did not make this post, then they cannot edit it
+        // if (postNotifier.currentPost.author != authNotifier.user.displayName)
+        floatingActionButton: FloatingActionButton( 
           onPressed: () {
           Navigator.of(context).push(
                   MaterialPageRoute(builder: (BuildContext context){
                     return PostForm(isUpdating: true); // edit button
         },));},
+        child: Icon(Icons.edit),
+        backgroundColor: Colors.white,
         ));
   }
 }

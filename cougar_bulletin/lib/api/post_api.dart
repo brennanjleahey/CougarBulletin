@@ -73,7 +73,7 @@ getPosts(PostNotifier postNotifier) async {
     _postList.add(post);
   });
 
-  postNotifier.postList = _postList;
+  postNotifier.postList = _postList.reversed.toList();
 }
 
 uploadPost(Post post, bool isUpdating) async {
