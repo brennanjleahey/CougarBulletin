@@ -1,6 +1,9 @@
 
+//import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cougar_bulletin/api/post_api.dart';
+import 'package:cougar_bulletin/feed_page.dart';
 import 'package:cougar_bulletin/notifier/post_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -57,25 +60,25 @@ class _PostFormState extends State<PostForm> {
     );
   }
 
+String dropdownValue = 'General';
+
   Widget _buildCategoryField(){
-    return TextFormField(
-      decoration: InputDecoration(labelText: 'Category'),
-      initialValue: _currentPost.category,
-      keyboardType: TextInputType.text,
-      style: TextStyle(fontSize: 20),
-      validator: (String value){
-        if (value.isEmpty){
-          return 'Category is required';
-        }
-        if (value.length < 3 || value.length > 10){
-          return 'Category must be 3-10 characters';
-        }
-        return null;
+    return DropdownButton<String>(
+      value: dropdownValue,
+      onChanged: (String newValue) {
+        setState(() {
+          dropdownValue = newValue;
+          _currentPost.category = newValue;
+        });
       },
-    onSaved: (String value){
-      _currentPost.category = value;
-    },
-    );
+      items: <String>['General', 'News', 'Trade', 'Event', 'Opportunity'].map((String dropDownStringItem) {
+        return DropdownMenuItem<String>(
+        value: dropDownStringItem,
+        child: Text(dropDownStringItem),
+      );
+      }).toList(),
+      
+      );
   }
 
   Widget _buildContactField(){
@@ -101,6 +104,7 @@ class _PostFormState extends State<PostForm> {
   Widget _buildBodyField(){
   return TextFormField(
     decoration: InputDecoration(labelText: 'Body'),
+    maxLines: 6,
       initialValue: _currentPost.body,
       keyboardType: TextInputType.text,
       style: TextStyle(fontSize: 20),
@@ -141,8 +145,28 @@ class _PostFormState extends State<PostForm> {
 
     print("Title: ${_currentPost.title}");
     print("Category: ${_currentPost.category}");
-    
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("Post"),
+          content: new Text("Post Successful."),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                   Navigator.of(context).push(
+                    MaterialPageRoute(builder: (BuildContext context){
+                    return FeedPage();
+                    })
+                   );
+              }
+            ),
+          ],
+        );
+      });
   }
+
 
 
   @override
@@ -164,7 +188,15 @@ class _PostFormState extends State<PostForm> {
             style: TextStyle(fontSize: 30),),
             SizedBox(height: 10),
           _buildTitleField(),
-          _buildCategoryField(),
+          Row(
+            children: <Widget>[
+              Text('Category',
+              style: TextStyle(fontSize: 20)),
+              SizedBox(width: 10,),
+              _buildCategoryField()
+            ],
+          ),
+          
           _buildContactField(),
           _buildBodyField(),
           ],

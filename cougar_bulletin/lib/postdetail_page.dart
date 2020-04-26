@@ -1,4 +1,5 @@
 import 'package:cougar_bulletin/feed_page.dart';
+import 'package:cougar_bulletin/login_page.dart';
 import 'package:cougar_bulletin/post_form.dart';
 import 'package:cougar_bulletin/notifier/post_notifier.dart';
 import 'package:cougar_bulletin/post_form.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'login_page.dart';
+import 'login_page.dart';
 import 'notifier/auth_notifier.dart';
 
 class PostDetail extends StatelessWidget {

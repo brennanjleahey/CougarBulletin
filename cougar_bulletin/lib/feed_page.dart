@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'api/post_api.dart';
+import 'login_page.dart';
 import 'notifier/auth_notifier.dart';
 
 class FeedPage extends StatefulWidget {
@@ -34,14 +35,27 @@ class _FeedPageState extends State<FeedPage> {
     print("building feed");
 
     return Scaffold(
+      drawer:  Drawer(
+
+            child: ListView(
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                   DrawerHeader(
+                     child: Text("Menu",style: TextStyle(color: Colors.white, fontSize: 25),  )),
+                  ListTile(title: Text('Profile'),
+                  onTap: () =>{Navigator.of(context).pop()},),
+                  ListTile(title: Text('My Posts'),
+                   onTap: () =>{Navigator.of(context).pop()},),
+                   ListTile(title: Text('Help'),
+                   onTap: () =>{Navigator.of(context).pop()},),
+                   ListTile(title: Text('Logout'),
+                   onTap: () =>{signout(authNotifier)},),
+                ],)
+          ),
       appBar: AppBar(
+        centerTitle: true,
         title: Text("Feed"),
         actions: <Widget>[
-          FlatButton(
-            child: Text('Logout',
-                style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-            onPressed: () => signout(authNotifier),
-          )
         ],
       ),
       body: RefreshIndicator(
@@ -51,8 +65,9 @@ class _FeedPageState extends State<FeedPage> {
             return ListTile(
               // Todo: leading image Coding with Curry Part 2 15:18
               title: Text(postNotifier.postList[index].title),
-              subtitle: Text(postNotifier.postList[index].author),
+              subtitle: Text(postNotifier.postList[index].category + ' - ' + postNotifier.postList[index].author),
               onTap: (){
+                
                 postNotifier.currentPost = postNotifier.postList[index];
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (BuildContext context){
