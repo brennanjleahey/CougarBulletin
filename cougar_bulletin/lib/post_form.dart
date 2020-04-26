@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'model/post.dart';
+import 'notifier/auth_notifier.dart';
 
 class PostForm extends StatefulWidget {
 
@@ -35,7 +36,7 @@ class _PostFormState extends State<PostForm> {
     }
   }
 
-  Widget _buildTitleField(){
+  Widget _buildTitleField(){  
     return TextFormField(
       decoration: InputDecoration(labelText: 'Title'),
       initialValue: _currentPost.title,
@@ -118,7 +119,7 @@ class _PostFormState extends State<PostForm> {
     );
   } 
 
-  _savePost(context) {
+  _savePost(context, AuthNotifier authNotifier) {
 
     if (!_formKey.currentState.validate()){
       return;
@@ -135,7 +136,7 @@ class _PostFormState extends State<PostForm> {
     }
 
     // Todo: set current post's author to current user
-    _currentPost.author = "leahe001";
+    _currentPost.author = authNotifier.user.displayName;
     uploadPost(_currentPost, widget.isUpdating);
 
     print("Title: ${_currentPost.title}");
@@ -146,6 +147,8 @@ class _PostFormState extends State<PostForm> {
 
   @override
   Widget build(BuildContext context) {
+    AuthNotifier authNotifier = Provider.of<AuthNotifier>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Post Form")),
@@ -169,7 +172,7 @@ class _PostFormState extends State<PostForm> {
           ),
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () => _savePost(context),
+            onPressed: () => _savePost(context, authNotifier),
             child: Icon(Icons.navigation),
             backgroundColor: Colors.blue,
             ),

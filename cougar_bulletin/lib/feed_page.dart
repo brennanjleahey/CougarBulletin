@@ -19,6 +19,7 @@ class _FeedPageState extends State<FeedPage> {
     PostNotifier postNotifier = Provider.of<PostNotifier>(context, listen: false);
     getPosts(postNotifier);
     super.initState();
+  
   }
 
   
@@ -69,16 +70,17 @@ class _FeedPageState extends State<FeedPage> {
           },
         ),
       ),
+      
       floatingActionButton: FloatingActionButton( 
         onPressed: () {
           postNotifier.currentPost = null;
           Navigator.of(context).push(
-                  MaterialPageRoute(builder: (BuildContext context){
-                    return PostForm(isUpdating: false);
+                  MaterialPageRoute(builder: (BuildContext context){return PostForm(isUpdating: false);
         },));},
+
         child: Icon(Icons.add),
         backgroundColor: Colors.white,
-        )
+        ),
     );
   }
 }
