@@ -59,14 +59,12 @@ class PostDetail extends StatelessWidget {
             ),
           ),
         ),
-        // Todo: condition - if the user did not make this post, then they cannot edit it
-        // if (postNotifier.currentPost.author != authNotifier.user.displayName)
         floatingActionButton: Visibility(
           child: FloatingActionButton( 
           onPressed: () {
             if(authNotifier.user.displayName == postNotifier.currentPost.author)
             {
-          Navigator.of(context).push(
+            Navigator.of(context).push(
                   MaterialPageRoute(builder: (BuildContext context){
                     return PostForm(isUpdating: true); // edit button
         },));}},

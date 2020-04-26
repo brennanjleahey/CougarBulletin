@@ -1,6 +1,7 @@
 import 'package:cougar_bulletin/notifier/post_notifier.dart';
 import 'package:cougar_bulletin/post_form.dart';
 import 'package:cougar_bulletin/postdetail_page.dart';
+import 'package:cougar_bulletin/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +44,10 @@ class _FeedPageState extends State<FeedPage> {
                    DrawerHeader(
                      child: Text("Menu",style: TextStyle(color: Colors.white, fontSize: 25),  )),
                   ListTile(title: Text('Profile'),
-                  onTap: () =>{Navigator.of(context).pop()},),
+                    onTap: () =>{
+                        postNotifier.currentPost = null,
+                        Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context){return ProfilePage();},))}),
                   ListTile(title: Text('My Posts'),
                    onTap: () =>{Navigator.of(context).pop()},),
                    ListTile(title: Text('Help'),
