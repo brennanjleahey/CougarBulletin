@@ -73,8 +73,8 @@ signup(User user, AuthNotifier authNotifier) async {
 }
 
 signout(AuthNotifier authNotifier) async {
+  if (authNotifier.user == null) { return;}
   await FirebaseAuth.instance.signOut().catchError((error) => print(error.code));
-
   authNotifier.setUser(null);
 }
 

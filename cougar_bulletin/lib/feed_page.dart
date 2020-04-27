@@ -27,7 +27,7 @@ class _FeedPageState extends State<FeedPage> {
   
   @override
   Widget build(BuildContext context) {
-    AuthNotifier authNotifier = Provider.of<AuthNotifier>(context);
+    AuthNotifier authNotifier = Provider.of<AuthNotifier>(context, listen: false);
     PostNotifier postNotifier = Provider.of<PostNotifier>(context);
 
     Future<void> _refreshList() async {
@@ -37,7 +37,6 @@ class _FeedPageState extends State<FeedPage> {
 
     return Scaffold(
       drawer:  Drawer(
-
             child: ListView(
                 padding: EdgeInsets.zero,
                 children: <Widget>[
@@ -46,6 +45,7 @@ class _FeedPageState extends State<FeedPage> {
                   ListTile(title: Text('Profile'),
                     onTap: () =>{
                         postNotifier.currentPost = null,
+                        Navigator.pop(context),
                         Navigator.of(context).push(
                         MaterialPageRoute(builder: (BuildContext context){return ProfilePage();},))}),
                   ListTile(title: Text('My Posts'),
@@ -53,7 +53,7 @@ class _FeedPageState extends State<FeedPage> {
                    ListTile(title: Text('Help'),
                    onTap: () =>{Navigator.of(context).pop()},),
                    ListTile(title: Text('Logout'),
-                   onTap: () =>{signout(authNotifier)},),
+                   onTap: () =>{  Navigator.pop(context), signout(authNotifier)},),
                 ],)
           ),
       appBar: AppBar(
