@@ -29,7 +29,7 @@ class _LoginState extends State<Login> {
     super.initState();
   }
 
-  void _submitForm() {
+  void _submitForm() async {
     if (!_formKey.currentState.validate()) {
       return;
     }
@@ -39,11 +39,34 @@ class _LoginState extends State<Login> {
     AuthNotifier authNotifier = Provider.of<AuthNotifier>(context, listen: false);
 
     if (_authMode == AuthMode.Login) {
-      login(_user, authNotifier);
+      String res = await login(_user, authNotifier);
+      if (res != ''){
+      _showDialogue(res);
+      }
     } else {
       signup(_user, authNotifier);
     }
+    
   }
+  void _showDialogue(String err) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("Error"),
+          content: new Text(err),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      });
+  }
+
 
   Widget _buildDisplayNameField() {
     return TextFormField(
@@ -78,7 +101,7 @@ class _LoginState extends State<Login> {
         labelStyle: TextStyle(color: Colors.white54),
       ),
       keyboardType: TextInputType.emailAddress,
-      initialValue: '@gmail.com', // CHANGE TO @csusm.edu 
+      initialValue: '@cougars.csusm.edu', 
       style: TextStyle(fontSize: 26, color: Colors.white),
       cursorColor: Colors.white,
       validator: (String value) {

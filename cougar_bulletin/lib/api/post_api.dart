@@ -6,21 +6,46 @@ import 'package:cougar_bulletin/model/user.dart';
 import 'package:cougar_bulletin/notifier/auth_notifier.dart';
 import 'package:cougar_bulletin/notifier/post_notifier.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
+// TODO: Handle google firebase login errors
 
-login(User user, AuthNotifier authNotifier) async {
-  AuthResult authResult = await FirebaseAuth.instance
-      .signInWithEmailAndPassword(email: user.email, password: user.password)
-      .catchError((error) => print(error.code));
+Future<String> login(User user, AuthNotifier authNotifier) async {
+  String res = '';
+  try
+  {
+    AuthResult authResult = await FirebaseAuth.instance.signInWithEmailAndPassword(email: user.email, password: user.password);
 
-  if (authResult != null) {
-    FirebaseUser firebaseUser = authResult.user;
+    if (authResult != null) {
+      FirebaseUser firebaseUser = authResult.user;
 
-    if (firebaseUser != null) {
-      print("Log In: $firebaseUser");
-      authNotifier.setUser(firebaseUser);
+      if (firebaseUser != null) {
+        print("Log In: $firebaseUser");
+        authNotifier.setUser(firebaseUser);
+      }
     }
   }
+  catch(err){
+    print(err.code);
+    res = err.code;
+  }
+  if (res!=''){
+    switch (res){
+      case 'ERROR_WRONG_PASSWORD':
+      res = 'Username or password incorrect.';
+      break;
+      case 'ERROR_USER_NOT_FOUND':
+      res = 'User could not be found.';
+      break;
+      case 'ERROR_TOO_MANY_REQUESTS':
+      res = 'Too many login attemps.';
+      break;
+      default:
+      res = 'Unknown exception. Please try again.';
+      break;
+    }
+  }
+  return res;
 }
 
 signup(User user, AuthNotifier authNotifier) async {
@@ -48,8 +73,8 @@ signup(User user, AuthNotifier authNotifier) async {
 }
 
 signout(AuthNotifier authNotifier) async {
+  if (authNotifier.user == null) { return;}
   await FirebaseAuth.instance.signOut().catchError((error) => print(error.code));
-
   authNotifier.setUser(null);
 }
 
@@ -73,7 +98,7 @@ getPosts(PostNotifier postNotifier) async {
     _postList.add(post);
   });
 
-  postNotifier.postList = _postList;
+  postNotifier.postList = _postList.reversed.toList();
 }
 
 uploadPost(Post post, bool isUpdating) async {

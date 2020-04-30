@@ -1,4 +1,5 @@
 import 'package:cougar_bulletin/feed_page.dart';
+import 'package:cougar_bulletin/login_page.dart';
 import 'package:cougar_bulletin/post_form.dart';
 import 'package:cougar_bulletin/notifier/post_notifier.dart';
 import 'package:cougar_bulletin/post_form.dart';
@@ -6,10 +7,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'login_page.dart';
+import 'login_page.dart';
+import 'notifier/auth_notifier.dart';
+
 class PostDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PostNotifier postNotifier = Provider.of<PostNotifier>(context, listen: false);
+    AuthNotifier authNotifier = Provider.of<AuthNotifier>(context);
 
     return Scaffold(
         appBar: AppBar(
@@ -53,12 +59,20 @@ class PostDetail extends StatelessWidget {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton( // Todo: condition - if the user did not make this post, then they cannot edit it
+        floatingActionButton: Visibility(
+          child: FloatingActionButton( 
           onPressed: () {
-          Navigator.of(context).push(
+            if(authNotifier.user.displayName == postNotifier.currentPost.author)
+            {
+            Navigator.of(context).push(
                   MaterialPageRoute(builder: (BuildContext context){
                     return PostForm(isUpdating: true); // edit button
-        },));},
-        ));
+        },));}},
+        child: Icon(Icons.edit),
+        backgroundColor: Colors.white,
+        ),
+        visible: authNotifier.user.displayName == postNotifier.currentPost.author? true : false,
+        )
+        );
   }
 }
