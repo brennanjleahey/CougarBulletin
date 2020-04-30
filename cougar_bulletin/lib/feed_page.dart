@@ -8,7 +8,7 @@ import 'api/post_api.dart';
 import 'notifier/auth_notifier.dart';
 
 class FeedPage extends StatefulWidget {
-  
+  static const String id = 'feedPage';
   @override
   _FeedPageState createState() => _FeedPageState();
 }
