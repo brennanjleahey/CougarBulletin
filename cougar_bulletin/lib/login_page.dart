@@ -179,7 +179,7 @@ class _LoginState extends State<Login> {
         constraints: BoxConstraints.expand(
           height: MediaQuery.of(context).size.height,
         ),
-        decoration: BoxDecoration(color: Color(0xff34056D)),
+        
         child: Form(
           autovalidate: true,
           key: _formKey,
