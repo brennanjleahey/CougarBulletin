@@ -188,11 +188,12 @@ class _LoginState extends State<Login> {
               padding: EdgeInsets.fromLTRB(32, 96, 32, 0),
               child: Column(
                 children: <Widget>[
-                  Text(
-                    "Please Sign In",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 36, color: Colors.white),
-                  ),
+                  Image(image: AssetImage('images/logo.jpg')),
+                  // Text(
+                  //   "Please Sign In",
+                  //   textAlign: TextAlign.center,
+                  //   style: TextStyle(fontSize: 36, color: Colors.white),
+                  // ),
                   SizedBox(height: 32),
                   _authMode == AuthMode.Signup ? _buildDisplayNameField() : Container(),
                   _buildEmailField(),
