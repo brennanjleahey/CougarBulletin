@@ -72,7 +72,7 @@ class _LoginState extends State<Login> {
     return TextFormField(
       decoration: InputDecoration(
         labelText: "Display Name",
-        labelStyle: TextStyle(color: Colors.white54),
+        labelStyle: TextStyle(color: Colors.black),
       ),
       keyboardType: TextInputType.text,
       style: TextStyle(fontSize: 26, color: Colors.white),
@@ -98,12 +98,12 @@ class _LoginState extends State<Login> {
     return TextFormField(
       decoration: InputDecoration(
         labelText: "Email",
-        labelStyle: TextStyle(color: Colors.white54),
+        labelStyle: TextStyle(color: Colors.black),
       ),
       keyboardType: TextInputType.emailAddress,
       initialValue: '@cougars.csusm.edu', 
-      style: TextStyle(fontSize: 26, color: Colors.white),
-      cursorColor: Colors.white,
+      style: TextStyle(fontSize: 26, color: Colors.black),
+      cursorColor: Colors.black,
       validator: (String value) {
         if (value.isEmpty) {
           return 'Email is required';
@@ -127,10 +127,10 @@ class _LoginState extends State<Login> {
     return TextFormField(
       decoration: InputDecoration(
         labelText: "Password",
-        labelStyle: TextStyle(color: Colors.white54),
+        labelStyle: TextStyle(color: Colors.black),
       ),
-      style: TextStyle(fontSize: 26, color: Colors.white),
-      cursorColor: Colors.white,
+      style: TextStyle(fontSize: 26, color: Colors.black),
+      cursorColor: Colors.black,
       obscureText: true,
       controller: _passwordController,
       validator: (String value) {
@@ -154,10 +154,10 @@ class _LoginState extends State<Login> {
     return TextFormField(
       decoration: InputDecoration(
         labelText: "Confirm Password",
-        labelStyle: TextStyle(color: Colors.white54),
+        labelStyle: TextStyle(color: Colors.black),
       ),
-      style: TextStyle(fontSize: 26, color: Colors.white),
-      cursorColor: Colors.white,
+      style: TextStyle(fontSize: 26, color: Colors.black),
+      cursorColor: Colors.black,
       obscureText: true,
       validator: (String value) {
         if (_passwordController.text != value) {
