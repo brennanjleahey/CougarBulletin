@@ -26,25 +26,59 @@ class _FeedPageState extends State<FeedPage> {
     activeSearch = false;
   }
 
- PreferredSizeWidget _appBar() {
+String dropdownValue = 'General';
+
+ PreferredSizeWidget _appBar(PostNotifier postNotifier) {
     if (activeSearch) {
       return AppBar(
+
         leading: Icon(Icons.search),
         title: TextField(
           decoration: InputDecoration(
+            //contentPadding:,
             hintText: "Sort by Category",
           ),
+        onTap: () => {},
         ),
+        
         actions: <Widget>[
-          IconButton(
+          
+          SizedBox(width: 10),
+          DropdownButton<String>(
+            value: dropdownValue,
+            
+            onChanged: (String newValue) {
+            setState(() {
+              dropdownValue = newValue;
+              if (newValue == "All")
+              {
+                getPosts(postNotifier);
+              }
+              else{
+                getPostByCategory(postNotifier, newValue);
+              }
+
+        });
+      },
+      items: <String>['All','General', 'News', 'Trade', 'Event', 'Opportunity'].map((String dropDownStringItem) {
+        return DropdownMenuItem<String>(
+        value: dropDownStringItem,
+        child: Text(dropDownStringItem),
+      );
+      }).toList(),
+      
+      ),
+      IconButton(
             icon: Icon(Icons.close),
             onPressed: () => setState(() => activeSearch = false),
-          )
+          ),
         ],
+        
       );
     } else {
       return AppBar(
-        title: Text("My App"),
+        title: Text("Feed"),
+        centerTitle: true,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
@@ -64,8 +98,12 @@ class _FeedPageState extends State<FeedPage> {
     PostNotifier postNotifier = Provider.of<PostNotifier>(context);
 
     Future<void> _refreshList() async {
-      getPosts(postNotifier);
+      if (activeSearch = false){
+        getPosts(postNotifier);
+      }
+      
     }
+
     print("building feed");
     return Scaffold(
       drawer:  Drawer(
@@ -88,7 +126,7 @@ class _FeedPageState extends State<FeedPage> {
                    onTap: () =>{  Navigator.pop(context), signout(authNotifier)},),
                 ],)
           ),
-          appBar: _appBar(),
+          appBar: _appBar(postNotifier),
       //appBar: AppBar(
       //  centerTitle: true,
       //  title: Text("Feed"),

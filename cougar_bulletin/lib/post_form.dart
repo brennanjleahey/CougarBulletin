@@ -49,8 +49,8 @@ class _PostFormState extends State<PostForm> {
         if (value.isEmpty){
           return 'Title is required';
         }
-        if (value.length < 3 || value.length > 20){
-          return 'Title must be more than 3 and less than 20 characters';
+        if (value.length < 3 || value.length > 33){
+          return 'Title must be more than 3 and less than 33 characters';
         }
         return null;
       },
