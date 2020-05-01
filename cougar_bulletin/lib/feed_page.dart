@@ -13,16 +13,49 @@ class FeedPage extends StatefulWidget {
   
   @override
   _FeedPageState createState() => _FeedPageState();
+
 }
 
 class _FeedPageState extends State<FeedPage> {
+  bool activeSearch;
   @override
   void initState() {
     PostNotifier postNotifier = Provider.of<PostNotifier>(context, listen: false);
     getPosts(postNotifier);
     super.initState();
-  
+    activeSearch = false;
   }
+
+ PreferredSizeWidget _appBar() {
+    if (activeSearch) {
+      return AppBar(
+        leading: Icon(Icons.search),
+        title: TextField(
+          decoration: InputDecoration(
+            hintText: "Sort by Category",
+          ),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () => setState(() => activeSearch = false),
+          )
+        ],
+      );
+    } else {
+      return AppBar(
+        title: Text("My App"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () => setState(() => activeSearch = true),
+          ),
+        ],
+      );
+    }
+  }
+
+
 
   
   @override
@@ -34,7 +67,6 @@ class _FeedPageState extends State<FeedPage> {
       getPosts(postNotifier);
     }
     print("building feed");
-
     return Scaffold(
       drawer:  Drawer(
             child: ListView(
@@ -56,12 +88,15 @@ class _FeedPageState extends State<FeedPage> {
                    onTap: () =>{  Navigator.pop(context), signout(authNotifier)},),
                 ],)
           ),
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text("Feed"),
-        actions: <Widget>[
-        ],
-      ),
+          appBar: _appBar(),
+      //appBar: AppBar(
+      //  centerTitle: true,
+      //  title: Text("Feed"),
+      //  actions: <Widget>[
+      //    
+      //  ],
+      //),
+      
       body: RefreshIndicator(
         onRefresh:() => _refreshList(),
         child: ListView.separated(

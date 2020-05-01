@@ -40,12 +40,21 @@ class MyApp extends StatelessWidget {
       ),
       home: Consumer<AuthNotifier>(
         builder: (context, notifier, child) {
-          if (notifier.isUserPresent()){
-            return FeedPage();
+          try {
+            
+            if (notifier.isUserPresent()){
+              return FeedPage();
+            }
+            else{
+              return Login();
+            }
+
+            }
+            catch(err){   
+                  print(err);   
+                  return Login();
           }
-          else{
-            return Login();
-          }
+          
           //return notifier.isUserPresent() ? FeedPage() : Login();
         },
       ),
