@@ -43,7 +43,7 @@ class _LoginState extends State<Login> {
       if (res != ''){
       _showDialogue(res);
       }
-    } else {
+    } else { // TODO: Handle Firebase signup errors
       signup(_user, authNotifier);
     }
     
@@ -75,15 +75,15 @@ class _LoginState extends State<Login> {
         labelStyle: TextStyle(color: Colors.black),
       ),
       keyboardType: TextInputType.text,
-      style: TextStyle(fontSize: 26, color: Colors.white),
+      style: TextStyle(fontSize: 24, color: Colors.black),
       cursorColor: Colors.white,
       validator: (String value) {
         if (value.isEmpty) {
           return 'Display Name is required';
         }
 
-        if (value.length < 5 || value.length > 12) {
-          return 'Display Name must be betweem 5 and 12 characters';
+        if (value.length < 5 || value.length > 15) {
+          return 'Display Name must be betweem 5 and 15 characters';
         }
 
         return null;
@@ -102,7 +102,7 @@ class _LoginState extends State<Login> {
       ),
       keyboardType: TextInputType.emailAddress,
       initialValue: '@cougars.csusm.edu', 
-      style: TextStyle(fontSize: 26, color: Colors.black),
+      style: TextStyle(fontSize: 24, color: Colors.black),
       cursorColor: Colors.black,
       validator: (String value) {
         if (value.isEmpty) {
@@ -129,7 +129,7 @@ class _LoginState extends State<Login> {
         labelText: "Password",
         labelStyle: TextStyle(color: Colors.black),
       ),
-      style: TextStyle(fontSize: 26, color: Colors.black),
+      style: TextStyle(fontSize: 24, color: Colors.black),
       cursorColor: Colors.black,
       obscureText: true,
       controller: _passwordController,
@@ -156,7 +156,7 @@ class _LoginState extends State<Login> {
         labelText: "Confirm Password",
         labelStyle: TextStyle(color: Colors.black),
       ),
-      style: TextStyle(fontSize: 26, color: Colors.black),
+      style: TextStyle(fontSize: 24, color: Colors.black),
       cursorColor: Colors.black,
       obscureText: true,
       validator: (String value) {
@@ -188,13 +188,13 @@ class _LoginState extends State<Login> {
               padding: EdgeInsets.fromLTRB(32, 96, 32, 0),
               child: Column(
                 children: <Widget>[
-                  Image(image: AssetImage('images/logo.jpg')),
+                  Image(image: AssetImage('images/logo.jpg'), height: 150, width: 200,),
                   // Text(
                   //   "Please Sign In",
                   //   textAlign: TextAlign.center,
                   //   style: TextStyle(fontSize: 36, color: Colors.white),
                   // ),
-                  SizedBox(height: 32),
+                  SizedBox(height: 16),
                   _authMode == AuthMode.Signup ? _buildDisplayNameField() : Container(),
                   _buildEmailField(),
                   _buildPasswordField(),
@@ -204,9 +204,12 @@ class _LoginState extends State<Login> {
                     minWidth: 200,
                     child: RaisedButton(
                       padding: EdgeInsets.all(10.0),
+                      splashColor: Colors.white,
+
                       child: Text(
                         'Switch to ${_authMode == AuthMode.Login ? 'Signup' : 'Login'}',
                         style: TextStyle(fontSize: 20, color: Colors.white),
+
                       ),
                       onPressed: () {
                         setState(() {
@@ -222,6 +225,7 @@ class _LoginState extends State<Login> {
                     child: RaisedButton(
                       padding: EdgeInsets.all(10.0),
                       onPressed: () => _submitForm(),
+                      splashColor: Colors.white,
                       child: Text(
                         _authMode == AuthMode.Login ? 'Login' : 'Signup',
                         style: TextStyle(fontSize: 20, color: Colors.white),
