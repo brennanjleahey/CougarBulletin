@@ -3,11 +3,10 @@
 // found in the LICENSE file.
 
 import 'package:cougar_bulletin/notifier/post_notifier.dart';
-import 'package:cougar_bulletin/screens/registration_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'screens/welcome_screen.dart';
-import 'screens/login_screen.dart';
+
 import 'feed_page.dart';
 import 'login_page.dart';
 
