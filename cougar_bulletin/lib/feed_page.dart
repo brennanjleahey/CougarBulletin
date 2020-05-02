@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'api/post_api.dart';
 import 'login_page.dart';
 import 'notifier/auth_notifier.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FeedPage extends StatefulWidget {
   
@@ -77,7 +78,15 @@ String dropdownValue = 'General';
       );
     } else {
       return AppBar(
-        title: Text("Feed"),
+         backgroundColor: Colors.blueAccent,
+        title: Text('Feed',
+          style:TextStyle(
+          fontFamily: 'Dancing Script',
+          fontSize: 30.0,
+          fontWeight:FontWeight.bold,
+          color: new Color(0xFFFFF8E1)
+          )
+        ),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
