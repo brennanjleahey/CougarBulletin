@@ -82,7 +82,7 @@ String dropdownValue = 'General';
         title: Text('Feed',
           style:TextStyle(
           fontFamily: 'Dancing Script',
-          fontSize: 30.0,
+          fontSize: 40.0,
           fontWeight:FontWeight.bold,
           color: new Color(0xFFFFF8E1)
           )
