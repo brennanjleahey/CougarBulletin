@@ -120,7 +120,12 @@ String dropdownValue = 'General';
                 padding: EdgeInsets.zero,
                 children: <Widget>[
                    DrawerHeader(
-                     child: Text("Menu",style: TextStyle(color: Colors.white, fontSize: 25),  )),
+                     child: Text("Menu",style: TextStyle(color: Colors.black, fontSize: 25)  ),
+                     decoration: new BoxDecoration(
+                       color:Colors.blueAccent
+                     ),
+                    ),
+                     
                   ListTile(title: Text('Profile'),
                     onTap: () =>{
                         postNotifier.currentPost = null,
