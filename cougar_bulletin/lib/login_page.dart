@@ -25,9 +25,10 @@ AnimationController controller;
 Animation animation;
   @override
   void initState() {
+    super.initState();
     AuthNotifier authNotifier = Provider.of<AuthNotifier>(context, listen: false);
     initializeCurrentUser(authNotifier);
-    super.initState();
+    
 
     controller = AnimationController(
     duration: Duration(seconds: 1),
@@ -40,8 +41,13 @@ Animation animation;
     controller.addListener((){
         print(controller.value);
     });
+}
 
-  }
+@override
+void dispose(){
+  controller.dispose();
+  super.dispose();
+}
 
   void _submitForm() async {
     if (!_formKey.currentState.validate()) {
