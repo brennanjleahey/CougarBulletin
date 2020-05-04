@@ -84,7 +84,7 @@ String dropdownValue = 'General';
           fontFamily: 'Dancing Script',
           fontSize: 40.0,
           fontWeight:FontWeight.bold,
-          color: new Color(0xFFFFF8E1)
+          color: new Color(0xFFFFF8E1)  
           )
         ),
         centerTitle: true,
@@ -97,9 +97,6 @@ String dropdownValue = 'General';
       );
     }
   }
-
-
-
   
   @override
   Widget build(BuildContext context) {
@@ -190,3 +187,29 @@ String dropdownValue = 'General';
     );
   }
 }
+// class DataSearch extends SearchDelegate<String>{
+//   @override
+//   List<Widget> buildActions(BuildContext context) {
+//       // TODO: implement buildActions
+//       throw UnimplementedError();
+//     }
+  
+//     @override
+//     Widget buildLeading(BuildContext context) {
+//       // TODO: implement buildLeading
+//       throw UnimplementedError();
+//     }
+  
+//     @override
+//     Widget builResults(BuildContext context) {
+//       // TODO: implement buildResults
+//       throw UnimplementedError();
+//     }
+  
+//     @override
+//     Widget builSuggestions(BuildContext context) {
+//     // TODO: implement buildSuggestions
+//     throw UnimplementedError();
+//   }
+  
+//}
