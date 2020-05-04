@@ -15,18 +15,32 @@ class Login extends StatefulWidget {
   }
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends State<Login> with SingleTickerProviderStateMixin{
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _passwordController = new TextEditingController();
   AuthMode _authMode = AuthMode.Login;
 
   User _user = User();
-
+AnimationController controller;
+Animation animation;
   @override
   void initState() {
     AuthNotifier authNotifier = Provider.of<AuthNotifier>(context, listen: false);
     initializeCurrentUser(authNotifier);
     super.initState();
+
+    controller = AnimationController(
+    duration: Duration(seconds: 1),
+    vsync: this, upperBound: 100
+    );
+    animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
+
+    controller.forward();
+
+    controller.addListener((){
+        print(controller.value);
+    });
+
   }
 
   void _submitForm() async {
@@ -189,7 +203,14 @@ class _LoginState extends State<Login> {
               padding: EdgeInsets.fromLTRB(32, 96, 32, 0),
               child: Column(
                 children: <Widget>[
-                  Image(image: AssetImage('images/logo.jpg'), height: 150, width: 200,),
+                  Hero(tag: 'logo',
+                     child: Container(
+                       child:Image.asset('images/logo.jpg'),
+                       height:animation.value
+                      ),
+                     ),
+
+                  //Image(image: AssetImage('images/logo.jpg'), height: 150, width: 200,),
                   // Text(
                   //   "Please Sign In",
                   //   textAlign: TextAlign.center,
