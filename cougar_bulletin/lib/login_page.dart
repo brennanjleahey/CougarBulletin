@@ -203,13 +203,7 @@ Animation animation;
               padding: EdgeInsets.fromLTRB(32, 96, 32, 0),
               child: Column(
                 children: <Widget>[
-                  Hero(tag: 'logo',
-                     child: Container(
-                       child:Image.asset('images/logo.jpg'),
-                       height:animation.value
-                      ),
-                     ),
-
+                  
                   //Image(image: AssetImage('images/logo.jpg'), height: 150, width: 200,),
                   // Text(
                   //   "Please Sign In",
