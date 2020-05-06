@@ -8,6 +8,8 @@ import 'api/post_api.dart';
 import 'login_page.dart';
 import 'notifier/auth_notifier.dart';
 
+
+
 class ProfilePage extends StatefulWidget {
     @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -29,15 +31,17 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
+          
           title: Text('My Profile',
+          style: TextStyle(fontStyle: FontStyle.italic),
           textAlign: TextAlign.center,),
           actions: <Widget>[
             FlatButton(
               onPressed: () => {Navigator.pop(context),signout(authNotifier)},
               child: Text(
                 "Logout",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ))
+                style: TextStyle(fontStyle: FontStyle.italic, fontSize: 20, color: Colors.white),
+                ))
           ],
         ),
       body: Center(
