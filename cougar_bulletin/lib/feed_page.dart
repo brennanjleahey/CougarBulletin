@@ -112,12 +112,15 @@ String dropdownValue = 'General';
 
     print("building feed");
     return Scaffold(
+      backgroundColor: Color(0xffb2ebf2),
+
       drawer:  Drawer(
             child: ListView(
                 padding: EdgeInsets.zero,
                 children: <Widget>[
                    DrawerHeader(
                      child: Text("Menu",style: TextStyle(color: Colors.black, fontSize: 25)  ),
+                      
                      decoration: new BoxDecoration(
                        color:Colors.blueAccent
                      ),
