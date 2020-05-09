@@ -31,9 +31,14 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
-          
+          backgroundColor: Colors.blueAccent,
           title: Text('My Profile',
-          style: TextStyle(fontStyle: FontStyle.italic),
+          style: TextStyle(
+            fontFamily:'Dancing Script',
+            fontSize: 40.0,
+            fontWeight: FontWeight.bold,
+            color: new Color(0xFFFFF8E1)
+          ),
           textAlign: TextAlign.center,),
           actions: <Widget>[
             FlatButton(
