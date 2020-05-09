@@ -185,33 +185,38 @@ String dropdownValue = 'General';
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(32),
-        child: Form(
-          key: _formKey,
-          autovalidate: true,
-          child: Column(children: <Widget>[
-            SizedBox(height: 10),
-            Text( widget.isUpdating ? "Edit Post" : "Create Post",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontFamily: 'Lobster Two',fontSize: 30),),
-            SizedBox(height: 10),
-          _buildTitleField(),
-          Row(
-            children: <Widget>[
-              Text('Category',
-              style: TextStyle(fontSize: 20)),
-              SizedBox(width: 10,),
-              _buildCategoryField()
-            ],
-          ),
-          
-          _buildContactField(),
-          _buildBodyField(),
-          ],
-          )
-          ),
-          ),
+      body: Center(
+        child: Container(
+
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(32),
+            child: Form(
+              key: _formKey,
+              autovalidate: true,
+              child: Column(children: <Widget>[
+                SizedBox(height: 10),
+                Text( widget.isUpdating ? "Edit Post" : "Create Post",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontFamily: 'Lobster Two',fontSize: 30),),
+                SizedBox(height: 10),
+              _buildTitleField(),
+              Row(
+                children: <Widget>[
+                  Text('Category',
+                  style: TextStyle(fontSize: 20)),
+                  SizedBox(width: 10,),
+                  _buildCategoryField()
+                ],
+              ),
+
+              _buildContactField(),
+              _buildBodyField(),
+              ],
+              )
+              ),
+              ),
+        ),
+      ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => _savePost(context, authNotifier),
             child: Icon(Icons.navigation),

@@ -119,26 +119,34 @@ String dropdownValue = 'General';
                 padding: EdgeInsets.zero,
                 children: <Widget>[
                    DrawerHeader(
-                     child: Text("Menu",style: TextStyle(color: Colors.black, fontSize: 25)  ),
+                     child: Text("Menu",style: TextStyle(fontFamily:'Lobster Two',color: Colors.black, fontSize: 25)  ),
                       
                      decoration: new BoxDecoration(
                        color:Colors.blueAccent
                      ),
                     ),
                      
-                  ListTile(title: Text('Profile'),
-                    onTap: () =>{
-                        postNotifier.currentPost = null,
-                        Navigator.pop(context),
-                        Navigator.of(context).push(
-                        MaterialPageRoute(builder: (BuildContext context){return ProfilePage();},))}),
-                  ListTile(title: Text('My Posts'),
-                   onTap: () =>{Navigator.of(context).pop()},),
-                   ListTile(title: Text('Help'),
-                   onTap: () =>{Navigator.of(context).pop()},),
-                   ListTile(title: Text('Logout'),
+                  Card(
+                    child: ListTile(title: Text('Profile'),
+                      onTap: () =>{
+                          postNotifier.currentPost = null,
+                          Navigator.pop(context),
+                          Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context){return ProfilePage();},))}),
+                  ),
+                  Card(
+                    child: ListTile(title: Text('My Posts'),
+                     onTap: () =>{Navigator.of(context).pop()},),
+                  ),
+                   Card(
+                     child: ListTile(title: Text('Help'),
+                     onTap: () =>{Navigator.of(context).pop()},),
+                   ),
+                   Card(
+                     child: ListTile(title: Text('Logout'),
                    onTap: () =>{  Navigator.pop(context), signout(authNotifier)},),
-                ],)
+                   ),],
+      ),
           ),
           appBar: _appBar(postNotifier),
       //appBar: AppBar(
