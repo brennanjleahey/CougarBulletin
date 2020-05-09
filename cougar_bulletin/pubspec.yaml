@@ -78,6 +78,14 @@ flutter:
      - family: Dancing Script
        fonts:
          - asset: fonts/DancingScript-VariableFont_wght.ttf
-  #
+
+     - family: Lobster Two
+       fonts:
+         - asset: fonts/LobsterTwo-Regular.ttf
+
+     - family: Lobster Two
+       fonts:
+         - asset: fonts/LobsterTwo-Regular.ttf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

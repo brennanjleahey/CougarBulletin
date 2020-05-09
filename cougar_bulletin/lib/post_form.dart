@@ -175,7 +175,16 @@ String dropdownValue = 'General';
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Post Form")),
+          backgroundColor: Colors.blueAccent,
+        title: Text("Post Form",
+        style:TextStyle(
+            fontFamily: 'Dancing Script',
+            fontSize: 40.0,
+            fontWeight:FontWeight.bold,
+            color: new Color(0xFFFFF8E1)
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(32),
         child: Form(
@@ -183,9 +192,9 @@ String dropdownValue = 'General';
           autovalidate: true,
           child: Column(children: <Widget>[
             SizedBox(height: 10),
-            Text( widget.isUpdating ? "Edit Post" : "Create Post", 
+            Text( widget.isUpdating ? "Edit Post" : "Create Post",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 30),),
+            style: TextStyle(fontFamily: 'Lobster Two',fontSize: 30),),
             SizedBox(height: 10),
           _buildTitleField(),
           Row(
