@@ -45,11 +45,12 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () => {Navigator.pop(context),signout(authNotifier)},
               child: Text(
                 "Logout",
-                style: TextStyle(fontStyle: FontStyle.italic, fontSize: 20, color: Colors.white),
+                style: TextStyle(fontStyle: FontStyle.italic, fontSize: 21, color: Colors.white),
                 ))
           ],
         ),
       body: Center(
+
         child: Container(
            margin: const EdgeInsets.only(left: 15.0, right: 15.0),
             child: Column(
