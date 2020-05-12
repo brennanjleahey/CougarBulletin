@@ -26,7 +26,22 @@ class _MyPostsState extends State<MyPosts> {
   Widget build(BuildContext context) {
     AuthNotifier authNotifier = Provider.of<AuthNotifier>(context);
 
-    return Scaffold();
+    return Scaffold(
+            backgroundColor: Color(0xffb2ebf2),
+            appBar: AppBar(
+              title: Text('My Posts', 
+              textAlign: TextAlign.center,
+              style: TextStyle(fontFamily:'Dancing Script',
+            fontSize: 40.0,
+            fontWeight: FontWeight.bold,
+            color: new Color(0xFFFFF8E1)
+          ),
+         ),),
+            
+
+            
+            );
+    
   }
 
 

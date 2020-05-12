@@ -2,13 +2,10 @@ import 'package:cougar_bulletin/feed_page.dart';
 import 'package:cougar_bulletin/login_page.dart';
 import 'package:cougar_bulletin/post_form.dart';
 import 'package:cougar_bulletin/notifier/post_notifier.dart';
-import 'package:cougar_bulletin/post_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'login_page.dart';
-import 'login_page.dart';
 import 'notifier/auth_notifier.dart';
 
 class PostDetail extends StatelessWidget {
@@ -30,7 +27,7 @@ class PostDetail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               mainAxisSize: MainAxisSize.max,
-              children: <Widget>[ // TODO: image.network CwC Part 2 20:30
+              children: <Widget>[ 
                 SizedBox(height: 10),
                 SizedBox(width: 30),
                 Text("Created at: " + postNotifier.currentPost.createdAt.toDate().toString(),
