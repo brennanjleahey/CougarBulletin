@@ -3,6 +3,7 @@ import 'package:cougar_bulletin/post_form.dart';
 import 'package:cougar_bulletin/postdetail_page.dart';
 import 'package:cougar_bulletin/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'myposts_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'api/post_api.dart';
@@ -136,7 +137,11 @@ String dropdownValue = 'General';
                   ),
                   Card(
                     child: ListTile(title: Text('My Posts'),
-                     onTap: () =>{Navigator.of(context).pop()},),
+                     onTap: () =>{                          
+                          postNotifier.currentPost = null,
+                          Navigator.pop(context),
+                          Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context){return MyPosts();},))},),
                   ),
                    Card(
                      child: ListTile(title: Text('Help'),
