@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cougar_bulletin/model/user.dart';
 import 'package:cougar_bulletin/notifier/auth_notifier.dart';
 import 'package:flutter/material.dart';
@@ -6,25 +8,46 @@ import 'package:provider/provider.dart';
 
 import 'api/post_api.dart';
 
-class AnimatedBackground extends StatelessWidget {
+
+enum AuthMode { Signup, Login }
+class FancyBackgroundApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final tween = MultiTrackTween([
-          Track("color1").add(Duration(seconds: 3),
-                        ColorTween(begin: Color(0xffD38312), end: Colors.lightBlue.shade900)),
-                    Track("color2").add(Duration(seconds: 3),
-                        ColorTween(begin: Color(0xffA83279), end: Colors.blue.shade600))
-                  ]);
-              
-                  var Playback;
-                }
-              
-                MultiTrackTween(List list) {}
-          
-            Track(String s) {}
+    return Stack(
+      children: <Widget>[
+        Positioned.fill(child: AnimatedBackground()),
+                onBottom(AnimatedWave(
+                                  height: 180,
+                                  speed: 1.0,
+                                )),
+                                onBottom(AnimatedWave(
+                                  height: 120,
+                                  speed: 0.9,
+                                  offset: pi,
+                                )),
+                                onBottom(AnimatedWave(
+                                  height: 220,
+                                  speed: 1.2,
+                                  offset: pi / 2,
+                                )),
+                                Positioned.fill(child: CenteredText()),
+                                                              ],
+                                                            );
+                                                          }
+                                                        
+                                                          onBottom(Widget child) => Positioned.fill(
+                                                                child: Align(
+                                                                  alignment: Alignment.bottomCenter,
+                                                                  child: child,
+                                                                ),
+                                                              );
+                                                        
+                                                          AnimatedBackground() {}
+                                                
+                                                  Widget AnimatedWave({int height, double speed, double offset}) {}
+                                
+                                  CenteredText() {}
 }
-enum AuthMode { Signup, Login }
-
 class Login extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
