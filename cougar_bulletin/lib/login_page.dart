@@ -210,12 +210,8 @@ void dispose(){
               child: Column(
                 children: <Widget>[
                   
-                  //Image(image: AssetImage('images/logo.jpg'), height: 150, width: 200,),
-                  // Text(
-                  //   "Please Sign In",
-                  //   textAlign: TextAlign.center,
-                  //   style: TextStyle(fontSize: 36, color: Colors.white),
-                  // ),
+                  Image(image: AssetImage('images/logo.jpg'), height: 150, width: 200,),
+
                   SizedBox(height: 16),
                   _authMode == AuthMode.Signup ? _buildDisplayNameField() : Container(),
                   _buildEmailField(),
