@@ -6,6 +6,23 @@ import 'package:provider/provider.dart';
 
 import 'api/post_api.dart';
 
+class AnimatedBackground extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final tween = MultiTrackTween([
+          Track("color1").add(Duration(seconds: 3),
+                        ColorTween(begin: Color(0xffD38312), end: Colors.lightBlue.shade900)),
+                    Track("color2").add(Duration(seconds: 3),
+                        ColorTween(begin: Color(0xffA83279), end: Colors.blue.shade600))
+                  ]);
+              
+                  var Playback;
+                }
+              
+                MultiTrackTween(List list) {}
+          
+            Track(String s) {}
+}
 enum AuthMode { Signup, Login }
 
 class Login extends StatefulWidget {
