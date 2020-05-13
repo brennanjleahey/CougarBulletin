@@ -8,8 +8,6 @@ import 'package:provider/provider.dart';
 
 import 'api/post_api.dart';
 
-
-enum AuthMode { Signup, Login }
 class FancyBackgroundApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -48,6 +46,9 @@ class FancyBackgroundApp extends StatelessWidget {
                                 
                                   CenteredText() {}
 }
+
+enum AuthMode { Signup, Login }
+
 class Login extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
