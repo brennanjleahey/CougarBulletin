@@ -147,7 +147,7 @@ String dropdownValue = 'General';
                      child: ListTile(title: Text('Help'),
                      onTap: () =>{Navigator.of(context).pop()},),
                    ),
-                   Card(
+                   Card(  
                      child: ListTile(title: Text('Logout'),
                    onTap: () =>{  Navigator.pop(context), signout(authNotifier)},),
                    ),],

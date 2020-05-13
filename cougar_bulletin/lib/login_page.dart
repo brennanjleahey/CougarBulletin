@@ -225,6 +225,10 @@ void dispose(){
                   ButtonTheme(
                     minWidth: 200,
                     child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.red)
+),
                       padding: EdgeInsets.all(10.0),
                       splashColor: Colors.white,
 
@@ -245,12 +249,17 @@ void dispose(){
                   ButtonTheme(
                     minWidth: 200,
                     child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.red)
+),
                       padding: EdgeInsets.all(10.0),
                       onPressed: () => _submitForm(),
                       splashColor: Colors.white,
                       child: Text(
                         _authMode == AuthMode.Login ? 'Login' : 'Signup',
                         style: TextStyle(fontSize: 20, color: Colors.white),
+                        
                       ),
                     ),
                   ),
