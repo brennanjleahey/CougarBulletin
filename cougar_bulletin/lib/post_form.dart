@@ -139,7 +139,10 @@ String dropdownValue = 'General';
       _currentPost.lastUpdate = _currentPost.createdAt;
     }
 
-    // Todo: set current post's author to current user
+    if (_currentPost.category == null){
+      _currentPost.category = 'General';
+    }
+
     _currentPost.author = authNotifier.user.displayName;
     uploadPost(_currentPost, widget.isUpdating);
 

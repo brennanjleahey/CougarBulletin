@@ -167,9 +167,8 @@ String dropdownValue = 'General';
         child: ListView.separated(
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              // Todo: leading image Coding with Curry Part 2 15:18
               title: Text(postNotifier.postList[index].title),
-              subtitle: Text(postNotifier.postList[index].category + ' - ' + postNotifier.postList[index].author),
+              subtitle: Text(postNotifier.postList[index].category.toString() + ' - ' + postNotifier.postList[index].author.toString()),
               onTap: (){
                 
                 postNotifier.currentPost = postNotifier.postList[index];

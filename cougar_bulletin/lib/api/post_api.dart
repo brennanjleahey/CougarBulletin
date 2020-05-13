@@ -101,6 +101,22 @@ getPosts(PostNotifier postNotifier) async {
   postNotifier.postList = _postList.reversed.toList();
 }
 
+getPostsByAuthor(PostNotifier postNotifier,String author) async {
+  QuerySnapshot snapshot = await Firestore.instance.collection('post').getDocuments();
+
+  List<Post> _postList = [];
+
+  snapshot.documents.forEach((document) {
+    Post post = Post.fromMap(document.data);
+    if (post.author == author){
+      _postList.add(post);
+    }
+
+  });
+
+  postNotifier.postList = _postList.reversed.toList();
+}
+
 getPostByCategory(PostNotifier postNotifier,String category) async {
   QuerySnapshot snapshot = await Firestore.instance.collection('post').getDocuments();
 
